@@ -22,11 +22,16 @@ public class SkyscannerHttpCalls {
     public ResponseEntity<GetListPlacesResponse> getListPlaces(GetListPlacesRequest getListPlacesRequest){
         final String uri = appProperties.getApiUrl() + getListPlacesRequest.paramsToQuery();
         RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.exchange(
+                uri,
+                HttpMethod.GET,
+                httpEntity(),
+                new ParameterizedTypeReference<GetListPlacesResponse>(){});
+    }
+
+    private HttpEntity<String> httpEntity(){
         HttpHeaders headers = new HttpHeaders();
         headers.set(appProperties.getTokenName(), appProperties.getTokenValue());
-        HttpEntity<String> entity = new HttpEntity<>(headers);
-
-        return restTemplate.exchange(uri, HttpMethod.GET, entity, new ParameterizedTypeReference<GetListPlacesResponse>(){});
-
+        return new HttpEntity<>(headers);
     }
 }
