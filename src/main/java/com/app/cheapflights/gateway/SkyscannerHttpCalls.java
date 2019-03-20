@@ -1,6 +1,6 @@
 package com.app.cheapflights.gateway;
 
-import com.app.cheapflights.config.AppConfig;
+import com.app.cheapflights.config.AppProperties;
 import com.app.cheapflights.gateway.model.GetListPlacesResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -14,15 +14,15 @@ import org.springframework.web.client.RestTemplate;
 public class SkyscannerHttpCalls {
 
     @Autowired
-    private AppConfig appConfig;
+    private AppProperties appProperties;
 
     private static final Logger logger = LogManager.getLogger(SkyscannerHttpCalls.class);
 
     public ResponseEntity<GetListPlacesResponse> getListPlaces(){
-        final String uri = "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/autosuggest/v1.0/UK/GBP/en-GB/?query=Stockholm";
+        final String uri = appProperties.getApiUrl() + "autosuggest/v1.0/UK/GBP/en-GB/?query=Stockholm";
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
-        headers.set(appConfig.getHeadername(), appConfig.getHeadervalue());
+        headers.set(appProperties.getTokenName(), appProperties.getTokenValue());
         HttpEntity<String> entity = new HttpEntity<>(headers);
 
         return restTemplate.exchange(uri, HttpMethod.GET, entity, new ParameterizedTypeReference<GetListPlacesResponse>(){});
