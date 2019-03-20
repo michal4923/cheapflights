@@ -16,7 +16,7 @@ import lombok.ToString;
 @JsonPropertyOrder({
         "Places"
 })
-public class PlaceWrapper {
+public class GetListPlacesResponse {
 
     @JsonProperty("Places")
     private List<Place> places = null;
