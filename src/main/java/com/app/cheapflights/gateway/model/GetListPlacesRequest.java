@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class GetListPlacesRequest {
+public class GetListPlacesRequest implements SkyscannerRequest {
 
     private static final String serviceName = "/autosuggest/v1.0/";
 
@@ -16,6 +16,7 @@ public class GetListPlacesRequest {
     private String currency;
     private String locale;
 
+    @Override
     public String paramsToQuery() {
         return  serviceName +
                 this.getCountry() + "/" +
