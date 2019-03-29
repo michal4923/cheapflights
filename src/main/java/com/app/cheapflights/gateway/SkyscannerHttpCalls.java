@@ -1,14 +1,15 @@
 package com.app.cheapflights.gateway;
 
 import com.app.cheapflights.config.AppProperties;
-import com.app.cheapflights.gateway.model.GetListPlacesRequest;
-import com.app.cheapflights.gateway.model.GetListPlacesResponse;
-import com.app.cheapflights.gateway.model.SkyscannerRequest;
+import com.app.cheapflights.gateway.model.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.*;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -26,6 +27,14 @@ public class SkyscannerHttpCalls {
                 HttpMethod.GET,
                 createHttpEntity(),
                 new ParameterizedTypeReference<GetListPlacesResponse>(){});
+    }
+
+    public ResponseEntity<GetBrowseQuotesResponse> getBrowseQuotes(GetBrowseQuotesRequest getBrowseQuotesRequest){
+        return new RestTemplate().exchange(
+                createUrl(getBrowseQuotesRequest),
+                HttpMethod.GET,
+                createHttpEntity(),
+                new ParameterizedTypeReference<GetBrowseQuotesResponse>(){});
     }
 
     private HttpEntity<String> createHttpEntity(){
