@@ -1,9 +1,7 @@
 package com.app.cheapflights.controller;
 
 import com.app.cheapflights.gateway.SkyscannerHttpCalls;
-import com.app.cheapflights.gateway.model.GetBrowseQuotesRequest;
-import com.app.cheapflights.gateway.model.GetBrowseQuotesResponse;
-import com.app.cheapflights.gateway.model.GetListPlacesRequest;
+import com.app.cheapflights.gateway.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,5 +21,12 @@ public class MainController {
                 "SFO-sky","JFK-sky", "2019-10-01", "2019-10-01");
 
         return skyscannerHttpCalls.getBrowseQuotes(getBrowseQuotesRequest);
+    }
+
+    @GetMapping("/route")
+    public ResponseEntity<GetBrowseRoutesResponse> getRoutes(){
+        GetBrowseRoutesRequest getBrowseRoutesRequest = new GetBrowseRoutesRequest("US","USD", "en-US",
+                "SFO-sky","JFK-sky", "2019-10-01", "2019-10-01");
+        return skyscannerHttpCalls.getBrowseRoutes(getBrowseRoutesRequest);
     }
 }

@@ -37,6 +37,14 @@ public class SkyscannerHttpCalls {
                 new ParameterizedTypeReference<GetBrowseQuotesResponse>(){});
     }
 
+    public ResponseEntity<GetBrowseRoutesResponse> getBrowseRoutes(GetBrowseRoutesRequest getBrowseRoutesRequest){
+        return new RestTemplate().exchange(
+                createUrl(getBrowseRoutesRequest),
+                HttpMethod.GET,
+                createHttpEntity(),
+                new ParameterizedTypeReference<GetBrowseRoutesResponse>(){});
+    }
+
     private HttpEntity<String> createHttpEntity(){
         HttpHeaders headers = new HttpHeaders();
         headers.set(appProperties.getTokenName(), appProperties.getTokenValue());
