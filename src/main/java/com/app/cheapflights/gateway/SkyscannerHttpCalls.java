@@ -45,6 +45,38 @@ public class SkyscannerHttpCalls {
                 new ParameterizedTypeReference<GetBrowseRoutesResponse>(){});
     }
 
+    public ResponseEntity<GetBrowseDatesResponse> getBrowseDates(GetBrowseDatesRequest getBrowseDatesRequest){
+        return new RestTemplate().exchange(
+                createUrl(getBrowseDatesRequest),
+                HttpMethod.GET,
+                createHttpEntity(),
+                new ParameterizedTypeReference<GetBrowseDatesResponse>() {});
+    }
+
+    public ResponseEntity<GetBrowseDatesInboundResponse> getBrowseDatesInbound(GetBrowseDatesInboundRequest getBrowseDatesInboundRequest){
+        return new RestTemplate().exchange(
+                createUrl(getBrowseDatesInboundRequest),
+                HttpMethod.GET,
+                createHttpEntity(),
+                new ParameterizedTypeReference<GetBrowseDatesInboundResponse>() {});
+    }
+
+    public ResponseEntity<GetBrowseQuotesInboundResponse> getBrowseQuotesInbound(GetBrowseQuotesInboundRequest getBrowseQuotesInboundRequest){
+        return new RestTemplate().exchange(
+                createUrl(getBrowseQuotesInboundRequest),
+                HttpMethod.GET,
+                createHttpEntity(),
+                new ParameterizedTypeReference<GetBrowseQuotesInboundResponse>() {});
+    }
+
+    public ResponseEntity<GetBrowseRoutesInboundResponse> getBrowseRoutesInbound(GetBrowseRoutesInboundRequest getBrowseRoutesInboundRequest){
+        return new RestTemplate().exchange(
+                createUrl(getBrowseRoutesInboundRequest),
+                HttpMethod.GET,
+                createHttpEntity(),
+                new ParameterizedTypeReference<GetBrowseRoutesInboundResponse>() {});
+    }
+
     private HttpEntity<String> createHttpEntity(){
         HttpHeaders headers = new HttpHeaders();
         headers.set(appProperties.getTokenName(), appProperties.getTokenValue());
